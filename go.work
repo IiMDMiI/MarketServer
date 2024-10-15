@@ -1,0 +1,10 @@
+go 1.23.2
+
+use (
+	./api/auth
+	./api/items
+	./cmd/server
+	./internal/app
+	./pkg/dbservice
+	./pkg/tockengen
+)
