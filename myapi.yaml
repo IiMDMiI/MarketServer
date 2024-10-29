@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Employee Management API
+  version: 1.0.0
+  description: API for managing employees in a company.
+servers:
+  - url: http://localhost/api/v1
+paths:
+  /emploees:
+    get:
+      summary: Returns employees
+      parameters:
+        - name: id
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/User'
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        Id:
+          type: integer
+          example: 1
+        Name:
+          type: string
+          example: "John"
+        Surname:
+          type: string
+          example: "Doe"
+        Phone:
+          type: string
+          example: "+123456789"
+        CompanyId:
+          type: integer
+          example: 101
+        Passport:
+          type: object
+          properties:
+            Type:
+              type: string
+              example: "Passport"
+            Number:
+              type: string
+              example: "A12345678"
+        Department:
+          type: object
+          properties:
+            Name:
+              type: string
+              example: "Sales"
+            Phone:
+              type: string
+              example: "+987654321"
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: "Invalid input parameters."
